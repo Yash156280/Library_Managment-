@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <script src="https://cdn.tailwindcss.com"></script>
+  <title>Admin Dashbord</title>
+</head>
+<body>
+  <a href="/host/create">Create Product</a>
+  <% products.forEach(item =>{ %>
+    
+   <div class="max-w-sm mx-auto bg-white rounded-2xl shadow-lg overflow-hidden">
+    <img class="w-full h-64 object-cover" src="<%= item.imageUrl %>" alt="Product Image" />
+    
+    <div class="p-5">
+      <h2 class="text-2xl font-semibold text-gray-800"><%= item.name %></h2>
+      <p class="mt-2 text-gray-600 text-sm"><%= item.description %></p>
+
+      <div class="mt-4 flex items-center justify-between">
+        <span class="text-xl font-bold text-blue-600"><%= item.price %></span>
+        <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-300">
+          <a href="/host/update/<%= item._id %>">Update</a>
+        </button>
+        <button class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-300">
+          <a href="/host/delete/<%= item._id %>">Delete</a>
+        </button>
+      </div>
+    </div>
+  </div>
+  <% }) %>
+
+</body>
+</html>

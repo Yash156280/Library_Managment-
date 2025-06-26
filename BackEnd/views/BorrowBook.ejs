@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Borrow-Book</title>
+</head>
+<body>
+  <!-- views/adminBorrowList.ejs -->
+<table>
+  <tr>
+    <th>User</th>
+    <th>Book</th>
+    <th>Status</th>
+    <th>Action</th>
+  </tr>
+  <% borrows.forEach(b => { %>
+    <tr>
+      <td><%= b.userId.name %></td>
+      <td><%= b.bookId.name %></td>
+      <td><%= b.status %></td>
+      <td>
+        <% if (b.status === 'pending') { %>
+          <form method="POST" action="/host/borrow/approve/<%= b._id %>">
+            <button>Approve</button>
+          </form>
+        <% } else { %>
+          Approved
+        <% } %>
+      </td>
+    </tr>
+  <% }) %>
+</table>
+
+</body>
+</html>

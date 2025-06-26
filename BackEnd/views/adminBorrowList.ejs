@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <title>Borrow Requests</title>
+</head>
+<body class="bg-gray-100">
+
+  <div class="container mx-auto p-6">
+    <h1 class="text-3xl font-bold mb-6">Borrow Requests</h1>
+
+    <% if (borrows.length === 0) { %>
+      <p>No borrow requests found.</p>
+    <% } else { %>
+      <div class="grid gap-6">
+        <% borrows.forEach(borrow => { %>
+          <div class="bg-white shadow-md rounded-lg p-4">
+            <p><strong>User:</strong> <%= borrow.userId.email %></p>
+            <p><strong>Book:</strong> <%= borrow.bookId.name %></p>
+            <p><strong>Status:</strong> 
+              <% if (borrow.status === "pending") { %>
+                <span class="text-yellow-600 font-semibold"><%= borrow.status %></span>
+              <% } else { %>
+                <span class="text-green-600 font-semibold"><%= borrow.status %></span>
+              <% } %>
+            </p>
+
+            <% if (borrow.status === "pending") { %>
+              <form action="/host/approve/<%= borrow._id %>" method="POST" class="mt-4">
+                <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">
+                  Approve
+                </button>
+              </form>
+            <% } %>
+          </div>
+        <% }) %>
+      </div>
+    <% } %>
+  </div>
+
+</body>
+</html>
